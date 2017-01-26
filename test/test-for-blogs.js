@@ -79,12 +79,12 @@ describe('BlogPost API resource', function(){
           			res.body.blogposts.should.be.a('array');
           			res.body.blogposts.should.have.length.of.at.least(1);
 
-          			res.body.restaurants.forEach(blogPost => {
+          			res.body.blogposts.forEach(blogPost => {
             			blogPost.should.be.a('object');
             			blogPost.should.include.keys('id', 'author', 'title', 'content', 'created');
           			});
           			resBlogPost = res.body.blogposts[0];
-          			return Restaurant.findById(resBlogPost.id);
+          			return BlogPost.findById(resBlogPost.id);
         		})
         		.then(blogPost => {
 					resBlogPost.id.should.equal(blogPost.id);
@@ -153,8 +153,6 @@ describe('BlogPost API resource', function(){
 					blogpost.content.should.equal(newBlog.content);
 				});
 		});
-		
-
 	});
 
 	describe('DELETE endpoint', function(){
@@ -204,7 +202,5 @@ describe('BlogPost API resource', function(){
 						});
 				});
 		});
-
 	});
-
 });
